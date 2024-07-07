@@ -1,0 +1,112 @@
+
+
+#Tarefas:
+#Implemente a estrutura básica do código conforme especificado acima.
+
+#Adicione pelo menos um método adicional exclusivo para cada classe derivada.
+
+#Exemplo para Livro: um método resumo() que imprime um breve resumo do livro.
+#Exemplo para DVD: um método genero() que retorna o gênero do filme.
+#Exemplo para Revista: um método periodicidade() que retorna a periodicidade de publicação (mensal, semanal, etc.).
+#Crie instâncias de cada classe derivada e teste todos os métodos.
+
+#Documente seu código com comentários explicativos.
+
+#Dicas:
+#Utilize a função super() para acessar métodos e atributos da classe base.
+#Teste cada método individualmente para garantir que a herança está funcionando corretamente.
+#Lembre-se de marcar os materiais como emprestados e devolvidos corretamente.
+#Boa prática! Se precisar de ajuda adicional, estou aqui para ajudar.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Classe base
+class MaterialBiblioteca:
+    def __init__(self, titulo, autor, ano_publicacao):
+        self.titulo = titulo
+        self.autor = autor
+        self.ano_publicacao = ano_publicacao
+        self.emprestado = False
+    
+    def descricao(self):
+        return f"{self.titulo} por {self.autor}, publicado em {self.ano_publicacao}"
+    
+    def emprestar(self):
+        if not self.emprestado:
+            self.emprestado = True
+            print(f"{self.titulo} foi emprestado.")
+        else:
+            print(f"{self.titulo} já está emprestado.")
+    
+    def devolver(self):
+        if self.emprestado:
+            self.emprestado = False
+            print(f"{self.titulo} foi devolvido.")
+        else:
+            print(f"{self.titulo} já está disponível.")
+
+# Classe derivada Livro
+class Livro(MaterialBiblioteca):
+    def __init__(self, titulo, autor, ano_publicacao, numero_paginas):
+        super().__init__(titulo, autor, ano_publicacao)
+        self.numero_paginas = numero_paginas
+    
+    def descricao(self):
+        return f"{super().descricao()} com {self.numero_paginas} páginas"
+
+# Classe derivada DVD
+class DVD(MaterialBiblioteca):
+    def __init__(self, titulo, autor, ano_publicacao, duracao):
+        super().__init__(titulo, autor, ano_publicacao)
+        self.duracao = duracao
+    
+    def descricao(self):
+        return f"{super().descricao()} com duração de {self.duracao} minutos"
+
+# Classe derivada Revista
+class Revista(MaterialBiblioteca):
+    def __init__(self, titulo, autor, ano_publicacao, numero_edicao):
+        super().__init__(titulo, autor, ano_publicacao)
+        self.numero_edicao = numero_edicao
+    
+    def descricao(self):
+        return f"{super().descricao()}, Edição número {self.numero_edicao}"
+
+# Função para testar as classes
+def main():
+    livro1 = Livro("O Senhor dos Anéis", "J.R.R. Tolkien", 1954, 1178)
+    dvd1 = DVD("Interestelar", "Christopher Nolan", 2014, 169)
+    revista1 = Revista("National Geographic", "Vários", 2020, 5)
+
+    print(livro1.descricao())
+    livro1.emprestar()
+    livro1.devolver()
+
+    print(dvd1.descricao())
+    dvd1.emprestar()
+    dvd1.devolver()
+
+    print(revista1.descricao())
+    revista1.emprestar()
+    revista1.devolver()
+
+if __name__ == "__main__":
+    main()
